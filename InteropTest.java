@@ -105,8 +105,8 @@ public class InteropTest {
 			});
 		}).thenCompose(client->{
 			return client.joinContextGroup(group).thenCompose(v->{
-				return CompletableFuture.completedFuture(null).thenAccept(i->{});
-				//return client.setContext(context);
+				//return CompletableFuture.completedFuture(null).thenAccept(i->{});
+				return client.setContext(context);
 			});
 		});
 		
