@@ -1,4 +1,3 @@
-package test;
 
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
