@@ -1,9 +1,9 @@
-
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,10 +74,12 @@ public class InteropTest {
 	}
 
 	public void clientSetContext() throws Exception {
-		Context context = new Context();
-		context.setId("MyId");
+		Context context = new Context();	
+        JSONObject contextId = new JSONObject();
+		contextId.put("ticker", "GOOG");
+        context.setId(contextId);
 		context.setName("MyName");
-		context.setType("MyType");
+		context.setType("instrument");
 		CompletionStage<Void> setContextFuture = desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
 			return client.getContextGroups().thenCompose(groups->{
 				return client.joinContextGroup("red").thenCompose(v->{
@@ -90,8 +92,10 @@ public class InteropTest {
 	}
 
 	public void clientAddContextListener(String group) throws Exception {
-		Context context = new Context();
-		context.setId("MyId");
+		Context context = new Context();	
+        JSONObject contextId = new JSONObject();
+		contextId.put("ticker", "GOOG");
+        context.setId(contextId);
 		context.setName("MyName");
 		context.setType("MyType");
 		
