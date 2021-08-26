@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +13,8 @@ public class JavaTest {
         try {
         	InteropTest i = new InteropTest();
         	InteropTest.setup();
-        	i.clientGetContextGroupInfo();
+        	i.clientGetAllClientsInContextGroup();
+        	i.clientSetContext();
                 			
 			in.readLine();
 		} catch (IOException e) {
