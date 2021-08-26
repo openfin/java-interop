@@ -1,4 +1,3 @@
-
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +14,6 @@ import com.openfin.desktop.Application;
 import com.openfin.desktop.ApplicationOptions;
 import com.openfin.desktop.DesktopConnection;
 import com.openfin.desktop.DesktopStateListener;
-import com.openfin.desktop.EventListener;
 import com.openfin.desktop.OpenFinRuntime;
 import com.openfin.desktop.RuntimeConfiguration;
 import com.openfin.desktop.WindowOptions;
