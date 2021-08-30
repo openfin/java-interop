@@ -30,7 +30,7 @@ public class InteropTest {
 		
 		ContextGroupInfo[] contextGroupInfo = getContextFuture.toCompletableFuture().get(100, TimeUnit.SECONDS);
 		for(ContextGroupInfo c : contextGroupInfo) {
-			clientAddContextListener(c.getId());
+			//clientAddContextListener();
 		}
 	}
 
@@ -91,25 +91,22 @@ public class InteropTest {
 		setContextFuture.toCompletableFuture().get(10, TimeUnit.SECONDS);
 	}
 
-	public void clientAddContextListener(String group) throws Exception {
-		Context context = new Context();	
-        JSONObject contextId = new JSONObject();
-		contextId.put("ticker", "GOOG");
-        context.setId(contextId);
+	public void clientAddContextListener() throws Exception {
+		Context context = new Context();
+		context.setId(new JSONObject("{\"ticker\": \"ABC\"}"));
 		context.setName("MyName");
 		context.setType("MyType");
-		
+
 		CompletableFuture<Context> listenerInvokedFuture = new CompletableFuture<>();
 		
-		desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
+		desktopConnection.getInterop().connect("InteropTest").thenCompose(client->{
 			return client.addContextListener(ctx->{
 				listenerInvokedFuture.complete(ctx);
 			}).thenApply(v->{
 				return client;
 			});
 		}).thenCompose(client->{
-			return client.joinContextGroup(group).thenCompose(v->{
-				//return CompletableFuture.completedFuture(null).thenAccept(i->{});
+			return client.joinContextGroup("red").thenCompose(v->{
 				return client.setContext(context);
 			});
 		});
