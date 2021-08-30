@@ -24,8 +24,10 @@ public class JavaTest {
 //        	
 //        	i.clientAddContextListener();
         	
-        	i.joinAllGroups();
-                			
+        	i.joinAllGroups("red");
+        	
+        	i.joinAllGroups("green");
+        	    			
 			in.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();

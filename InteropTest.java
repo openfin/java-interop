@@ -114,24 +114,22 @@ public class InteropTest {
 		});
 		
 		Context ctx = listenerInvokedFuture.toCompletableFuture().get(10, TimeUnit.SECONDS);
-		System.out.print(false);
 	}
 	
-	public void joinAllGroups() throws Exception {
-		CompletableFuture<Context> listenerInvokedFuture = new CompletableFuture<>();
-		desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
-			return client.getContextGroups().thenCompose(groups->{
-				return client.joinContextGroup("red").thenCompose(v->{
-					return client.addContextListener(ctx->{
-						System.out.print(ctx.getId());
-						listenerInvokedFuture.complete(ctx);
+	public void joinAllGroups(String color) throws Exception {
+		CompletableFuture<Context> listenerInvokedFuture = new CompletableFuture<>();		
+		
+			desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
+				return client.getContextGroups().thenCompose(groups->{
+					return client.joinContextGroup(color).thenCompose(v->{
+						return client.addContextListener(ctx->{
+							System.out.print(color + ctx.getId());
+							listenerInvokedFuture.complete(ctx);
+						});
 					});
 				});
 			});
-		});
-		
-		Context ctx = listenerInvokedFuture.toCompletableFuture().get(10, TimeUnit.SECONDS);
-		System.out.print(false);
+		}
 	}
-}
+
 
