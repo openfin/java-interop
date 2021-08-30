@@ -92,14 +92,16 @@ public class InteropTest {
 	}
 
 	public void clientAddContextListener() throws Exception {
-		Context context = new Context();
-		context.setId(new JSONObject("{\"ticker\": \"ABC\"}"));
+		Context context = new Context();	
+        JSONObject contextId = new JSONObject();
+		contextId.put("ticker", "WMT");
+        context.setId(contextId);
 		context.setName("MyName");
-		context.setType("MyType");
+		context.setType("instrument");
 
 		CompletableFuture<Context> listenerInvokedFuture = new CompletableFuture<>();
 		
-		desktopConnection.getInterop().connect("InteropTest").thenCompose(client->{
+		desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
 			return client.addContextListener(ctx->{
 				listenerInvokedFuture.complete(ctx);
 			}).thenApply(v->{
@@ -112,6 +114,7 @@ public class InteropTest {
 		});
 		
 		Context ctx = listenerInvokedFuture.toCompletableFuture().get(10, TimeUnit.SECONDS);
+		System.out.print(false);
 	}
 }
 
