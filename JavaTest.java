@@ -14,15 +14,17 @@ public class JavaTest {
         	InteropTest i = new InteropTest();
         	InteropTest.setup();
         	
-        	i.clientGetContextGroupInfo();
+//        	i.clientGetContextGroupInfo();
+//        	
+//        	i.clientGetInfoForContextGroup();
+//        	
+//        	i.clientGetAllClientsInContextGroup();
+//        	
+//        	i.clientSetContext();
+//        	
+//        	i.clientAddContextListener();
         	
-        	i.clientGetInfoForContextGroup();
-        	
-        	i.clientGetAllClientsInContextGroup();
-        	
-        	i.clientSetContext();
-        	
-        	i.clientAddContextListener();
+        	i.joinAllGroups();
                 			
 			in.readLine();
 		} catch (IOException e) {
