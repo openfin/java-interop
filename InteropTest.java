@@ -73,10 +73,10 @@ public class InteropTest {
 		testFuture.toCompletableFuture().get(10, TimeUnit.SECONDS);
 	}
 
-	public void clientSetContext(String group) throws Exception {
+	public void clientSetContext(String group, String ticker) throws Exception {
 		Context context = new Context();	
         JSONObject contextId = new JSONObject();
-		contextId.put("ticker", "GOOG");
+		contextId.put("ticker", ticker);
         context.setId(contextId);
 		context.setName("MyName");
 		context.setType("instrument");
