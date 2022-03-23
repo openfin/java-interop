@@ -73,14 +73,14 @@ public class InteropTest {
 		testFuture.toCompletableFuture().get(10, TimeUnit.SECONDS);
 	}
 
-	public void clientSetContext(String group, String ticker) throws Exception {
+	public void clientSetContext(String group, String ticker, String platformName) throws Exception {
 		Context context = new Context();	
         JSONObject contextId = new JSONObject();
 		contextId.put("ticker", ticker);
         context.setId(contextId);
 		context.setName("MyName");
 		context.setType("instrument");
-		CompletionStage<Void> setContextFuture = desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
+		CompletionStage<Void> setContextFuture = desktopConnection.getInterop().connect(platformName).thenCompose(client->{
 			return client.getContextGroups().thenCompose(groups->{
 				return client.joinContextGroup(group).thenCompose(v->{
 					return client.setContext(context);

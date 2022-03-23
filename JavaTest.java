@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.apache.log4j.BasicConfigurator;
@@ -24,16 +25,21 @@ public class JavaTest implements ActionListener{
 	static InteropTest i = new InteropTest();
 	JLabel ticker = new JLabel("Empty");
 	JComboBox tickersCB;
+	String platform;
 	public JavaTest() {
     	JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
 		JLabel btnLabelListen = new JLabel("Select to listen to Channel");
 		JLabel btnLabelSet = new JLabel("Select to set Channel:");
 		JLabel LabelTicker = new JLabel("Select ticker symbol:");
+        platform = JOptionPane.showInputDialog("Enter Platform id:");
+        
 		String[] tickers = { "aapl", "msft", "goog", "tsla" };
 		tickersCB = new JComboBox(tickers);
+		//tickersCB.putClientProperty("join", false);
 		tickersCB.setSelectedIndex(0);
-
+		//tickersCB.addActionListener(this);
+		
 		String[] petStrings = { "red", "green", "pink", "orange", "purple", "yellow" };
 
 		JComboBox JoinChannelCB = new JComboBox(petStrings);
@@ -56,8 +62,6 @@ public class JavaTest implements ActionListener{
 		panel.add(JoinChannelCB);
 		panel.add(btnLabelSet);
 		panel.add(SetChannelCB);
-
-
 		
 		frame.add(panel, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,9 +89,9 @@ public class JavaTest implements ActionListener{
         try {
         	if((boolean) cb.getClientProperty("join")) {
         		i.joinAllGroups(color, this);	
-        	}else {
+        	} else {
         		String a = tickersCB.getSelectedItem().toString();
-        		i.clientSetContext(color, tickersCB.getSelectedItem().toString());
+        		i.clientSetContext(color, tickersCB.getSelectedItem().toString(), platform);
         	}
 		} catch (Exception e1) {
 			e1.printStackTrace();
