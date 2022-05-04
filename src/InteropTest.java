@@ -119,7 +119,7 @@ public class InteropTest {
 	public void joinAllGroups(String color, JavaTest t) throws Exception {
 		CompletableFuture<Context> listenerInvokedFuture = new CompletableFuture<>();		
 		JSONObject retval = new JSONObject(); 
-			desktopConnection.getInterop().connect("register-with-home").thenCompose(client->{
+			desktopConnection.getInterop().connect(t.platform).thenCompose(client->{
 				return client.getContextGroups().thenCompose(groups->{
 					return client.joinContextGroup(color).thenCompose(v->{
 						return client.addContextListener(ctx->{
