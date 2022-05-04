@@ -1,25 +1,10 @@
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.ItemSelectable;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import org.apache.log4j.BasicConfigurator;
 import org.json.JSONObject;
 
-import com.openfin.desktop.ActionEvent;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class JavaTest implements ActionListener{
 	static InteropTest i = new InteropTest();
@@ -71,12 +56,9 @@ public class JavaTest implements ActionListener{
 	}
 	public static void main(String[] args) throws Exception {
 		BasicConfigurator.configure();
-		
-        
 		JavaTest jt = new JavaTest();
         try {
-        	
-        	i.setup();
+        	i.setup(jt.platform);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -88,7 +70,7 @@ public class JavaTest implements ActionListener{
         String color = (String)cb.getSelectedItem();
         try {
         	if((boolean) cb.getClientProperty("join")) {
-        		i.joinAllGroups(color, this);	
+        		i.joinAllGroups(color,this);
         	} else {
         		String a = tickersCB.getSelectedItem().toString();
         		i.clientSetContext(color, tickersCB.getSelectedItem().toString(), platform);

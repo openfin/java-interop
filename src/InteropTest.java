@@ -17,14 +17,15 @@ public class InteropTest {
 
 	private static final String DESKTOP_UUID = InteropTest.class.getName();
 	private static DesktopConnection desktopConnection;
-
-	public void setup() throws Exception {
+	private String platformId;
+	public void setup(String platformId) throws Exception {
 		logger.debug("starting");
 		desktopConnection = TestUtils.setupConnection(DESKTOP_UUID);
+		this.platformId = platformId;
 	}
 
 	public void clientGetContextGroupInfo() throws Exception {
-		CompletionStage<ContextGroupInfo[]> getContextFuture = desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
+		CompletionStage<ContextGroupInfo[]> getContextFuture = desktopConnection.getInterop().connect(this.platformId).thenCompose(client->{
 			return client.getContextGroups();
 		});
 		
@@ -35,7 +36,7 @@ public class InteropTest {
 	}
 
 	public void clientGetInfoForContextGroup() throws Exception {
-		CompletionStage<ContextGroupInfo> getContextFuture = desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
+		CompletionStage<ContextGroupInfo> getContextFuture = desktopConnection.getInterop().connect(this.platformId).thenCompose(client->{
 			return client.getInfoForContextGroup("red");
 		});
 		
@@ -44,7 +45,7 @@ public class InteropTest {
 	}
 	
 	public void clientGetAllClientsInContextGroup() throws Exception {
-		CompletionStage<ClientIdentity[]> getContextFuture = desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
+		CompletionStage<ClientIdentity[]> getContextFuture = desktopConnection.getInterop().connect(this.platformId).thenCompose(client->{
 			return client.joinContextGroup("red").thenCompose(v->{
 				return client.getAllClientsInContextGroup("red");
 			});
@@ -56,7 +57,7 @@ public class InteropTest {
 	public void clientJoinThenRemoveFromContextGroup() throws Exception {
 		AtomicInteger clientCntAfterJoin = new AtomicInteger(0);
 		AtomicInteger clientCntAfterRemove = new AtomicInteger(0);
-		CompletionStage<?> testFuture = desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
+		CompletionStage<?> testFuture = desktopConnection.getInterop().connect(this.platformId).thenCompose(client->{
 			return client.joinContextGroup("red").thenCompose(v->{
 				return client.getAllClientsInContextGroup("red");
 			}).thenAccept(clients->{
@@ -101,7 +102,7 @@ public class InteropTest {
 
 		CompletableFuture<Context> listenerInvokedFuture = new CompletableFuture<>();
 		
-		desktopConnection.getInterop().connect("openfin-browser").thenCompose(client->{
+		desktopConnection.getInterop().connect(this.platformId).thenCompose(client->{
 			return client.addContextListener(ctx->{
 				listenerInvokedFuture.complete(ctx);
 			}).thenApply(v->{
@@ -116,15 +117,15 @@ public class InteropTest {
 		Context ctx = listenerInvokedFuture.toCompletableFuture().get(10, TimeUnit.SECONDS);
 	}
 	
-	public void joinAllGroups(String color, JavaTest t) throws Exception {
+	public void joinAllGroups(String color, JavaTest JT) throws Exception {
 		CompletableFuture<Context> listenerInvokedFuture = new CompletableFuture<>();		
 		JSONObject retval = new JSONObject(); 
-			desktopConnection.getInterop().connect(t.platform).thenCompose(client->{
+			desktopConnection.getInterop().connect(platformId).thenCompose(client->{
 				return client.getContextGroups().thenCompose(groups->{
 					return client.joinContextGroup(color).thenCompose(v->{
 						return client.addContextListener(ctx->{
 							System.out.print(color + ctx.getId());
-							t.updateTicker(ctx.getId());
+							JT.updateTicker(ctx.getId());
 							listenerInvokedFuture.complete(ctx);
 						});
 					});
