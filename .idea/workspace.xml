@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8de7f433-9113-461c-8a15-7c428dca362a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InteropTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InteropTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="8de7f433-9113-461c-8a15-7c428dca362a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +32,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../interop-api/java" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
