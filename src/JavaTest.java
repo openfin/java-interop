@@ -21,18 +21,18 @@ public class JavaTest implements ActionListener{
         
         String[] tickers = { "AAPL", "MSFT", "GOOG", "TSLA" };
 		tickersCB = new JComboBox(tickers);
-		//tickersCB.putClientProperty("join", false);
+		tickersCB.putClientProperty("ticker", false);
 		tickersCB.setSelectedIndex(0);
-		//tickersCB.addActionListener(this);
+		tickersCB.addActionListener(this);
 		
-		String[] petStrings = { "red", "green", "pink", "orange", "purple", "yellow" };
+		String[] channelColors = { "red", "green", "pink", "orange", "purple", "yellow" };
 
-		JComboBox JoinChannelCB = new JComboBox(petStrings);
+		JComboBox JoinChannelCB = new JComboBox(channelColors);
 		JoinChannelCB.putClientProperty("join", true);
 		JoinChannelCB.setSelectedIndex(1);
 		JoinChannelCB.addActionListener(this);
 		
-		JComboBox SetChannelCB = new JComboBox(petStrings);
+		JComboBox SetChannelCB = new JComboBox(channelColors);
 		SetChannelCB.putClientProperty("join", false);
 		SetChannelCB.setSelectedIndex(1);
 		SetChannelCB.addActionListener(this);
@@ -69,9 +69,9 @@ public class JavaTest implements ActionListener{
         JComboBox cb = (JComboBox)e.getSource();
         String color = (String)cb.getSelectedItem();
         try {
-        	if((boolean) cb.getClientProperty("join")) {
+        	if(cb.getClientProperty("join") != null && ((boolean) cb.getClientProperty("join"))) {
         		i.joinAllGroups(color,this);
-        	} else {
+        	} else if(cb.getClientProperty("ticker") != null && (boolean) cb.getClientProperty("ticker")) {
         		String a = tickersCB.getSelectedItem().toString();
         		i.clientSetContext(color, tickersCB.getSelectedItem().toString(), platform);
         	}
