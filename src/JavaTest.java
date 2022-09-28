@@ -10,6 +10,7 @@ public class JavaTest implements ActionListener{
 	static InteropTest i = new InteropTest();
 	JLabel ticker = new JLabel("Empty");
 	JComboBox tickersCB;
+	JComboBox JoinChannelCB;
 	String platform;
 	public JavaTest() {
     	JFrame frame = new JFrame();
@@ -21,13 +22,13 @@ public class JavaTest implements ActionListener{
         
         String[] tickers = { "AAPL", "MSFT", "GOOG", "TSLA" };
 		tickersCB = new JComboBox(tickers);
-		tickersCB.putClientProperty("ticker", false);
+		tickersCB.putClientProperty("ticker", true);
 		tickersCB.setSelectedIndex(0);
 		tickersCB.addActionListener(this);
 		
 		String[] channelColors = { "red", "green", "pink", "orange", "purple", "yellow" };
 
-		JComboBox JoinChannelCB = new JComboBox(channelColors);
+		JoinChannelCB = new JComboBox(channelColors);
 		JoinChannelCB.putClientProperty("join", true);
 		JoinChannelCB.setSelectedIndex(1);
 		JoinChannelCB.addActionListener(this);
@@ -67,13 +68,11 @@ public class JavaTest implements ActionListener{
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent e) {
         JComboBox cb = (JComboBox)e.getSource();
-        String color = (String)cb.getSelectedItem();
         try {
         	if(cb.getClientProperty("join") != null && ((boolean) cb.getClientProperty("join"))) {
-        		i.joinAllGroups(color,this);
+        		i.joinAllGroups(JoinChannelCB.getSelectedItem().toString(),this);
         	} else if(cb.getClientProperty("ticker") != null && (boolean) cb.getClientProperty("ticker")) {
-        		String a = tickersCB.getSelectedItem().toString();
-        		i.clientSetContext(color, tickersCB.getSelectedItem().toString(), platform);
+        		i.clientSetContext(JoinChannelCB.getSelectedItem().toString(), tickersCB.getSelectedItem().toString(), platform);
         	}
 		} catch (Exception e1) {
 			e1.printStackTrace();
