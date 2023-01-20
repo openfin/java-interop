@@ -1,5 +1,7 @@
 import org.json.JSONObject;
-
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.DefaultConfiguration;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -55,6 +57,8 @@ public class JavaTest implements ActionListener{
 		frame.setVisible(true);
 	}
 	public static void main(String[] args) throws Exception {
+		Configurator.initialize(new DefaultConfiguration());
+		Configurator.setRootLevel(Level.INFO);
 		JavaTest jt = new JavaTest();
         try {
         	i.setup(jt.platform);
