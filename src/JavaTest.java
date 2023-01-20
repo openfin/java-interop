@@ -1,4 +1,3 @@
-import org.apache.log4j.BasicConfigurator;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -56,7 +55,6 @@ public class JavaTest implements ActionListener{
 		frame.setVisible(true);
 	}
 	public static void main(String[] args) throws Exception {
-		BasicConfigurator.configure();
 		JavaTest jt = new JavaTest();
         try {
         	i.setup(jt.platform);
